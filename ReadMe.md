@@ -15,7 +15,7 @@ A tiny traffic intersection sim built with [Macroquad]. Cars spawn from the four
 - `purple` → turn right
 
 ## How it works (quick tour)
-- `lights.rs`: TrafficLights cycles the active direction all-red between 3s greens.
+- `lights.rs`: TrafficLights cycles the active direction: all-red between 3s greens.
 
 - `car.rs`: Car holds position, direction, color, turning rules and spacing checks.
 
