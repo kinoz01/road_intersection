@@ -93,7 +93,7 @@ fn angle_for(dir: Direction) -> f32 {
 }
 
 // Return a reference; don’t move textures out of the holder
-fn sprite_for(s: &CarSprites, c: &Car) -> &Texture2D {
+fn sprite_for<'a>(s: &'a CarSprites, c: &Car) -> &'a Texture2D {
     if c.color == BLUE {
         &s.blue
     } else if c.color == YELLOW {
