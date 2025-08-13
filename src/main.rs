@@ -8,7 +8,7 @@ use macroquad::prelude::*;
 
 // ---------- tiny draw helpers ----------
 fn grass_bg(tile: f32) {
-    clear_background(Color { r: 0.25, g: 0.55, b: 0.18, a: 1.0 });
+    clear_background(Color { r: 0.20, g: 0.55, b: 0.18, a: 1.0 });
     let patch = Color { r: 0.10, g: 0.45, b: 0.14, a: 1.0 };
     let w = screen_width();
     let h = screen_height();
@@ -138,7 +138,7 @@ async fn main() {
 
     loop {
         // grass
-        grass_bg(20.0);
+        grass_bg(25.0);
 
         // roads
         draw_rectangle(0.0, h_road_y, 800.0, road_w, asphalt);
@@ -216,8 +216,8 @@ async fn main() {
         // input
         if is_key_pressed(KeyCode::Up)    { key_up(&mut cars_vec); }
         if is_key_pressed(KeyCode::Down)  { key_down(&mut cars_vec); }
-        if is_key_pressed(KeyCode::Left)  { key_right(&mut cars_vec); } // from right, moving left
-        if is_key_pressed(KeyCode::Right) { key_left(&mut cars_vec);  } // from left, moving right
+        if is_key_pressed(KeyCode::Left)  { key_right(&mut cars_vec); }
+        if is_key_pressed(KeyCode::Right) { key_left(&mut cars_vec);  }
         if is_key_pressed(KeyCode::R)     { key_r(&mut cars_vec); }
         if is_key_pressed(KeyCode::Escape) { break; }
 
