@@ -8,7 +8,7 @@ use macroquad::prelude::*;
 
 // ---------- tiny draw helpers ----------
 fn grass_bg(tile: f32) {
-    clear_background(Color { r: 0.14, g: 0.55, b: 0.18, a: 1.0 });
+    clear_background(Color { r: 0.25, g: 0.55, b: 0.18, a: 1.0 });
     let patch = Color { r: 0.10, g: 0.45, b: 0.14, a: 1.0 };
     let w = screen_width();
     let h = screen_height();
@@ -87,7 +87,7 @@ fn angle_for(dir: Direction) -> f32 {
     }
 }
 
-// Return a reference; dontt move textures out of the holder
+// Return a reference
 fn sprite_for<'a>(s: &'a CarSprites, c: &Car) -> &'a Texture2D {
     if c.color == BLUE {
         &s.blue
