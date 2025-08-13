@@ -225,7 +225,7 @@ async fn main() {
         if is_key_pressed(KeyCode::Left)  { key_right(&mut cars_vec); } // spawn from right, moving left
         if is_key_pressed(KeyCode::Right) { key_left(&mut cars_vec);  } // spawn from left, moving right
         if is_key_pressed(KeyCode::R)     { key_r(&mut cars_vec); }
-        if is_key_pressed(KeyCode::Escape) { break; }
+        if is_key_pressed(KeyCode::Escape) || is_quit_requested() { break; }
 
         next_frame().await;
     }

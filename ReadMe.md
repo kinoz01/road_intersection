@@ -9,7 +9,7 @@ A tiny traffic intersection sim built with [Macroquad]. Cars spawn from the four
 - `R`: spawn random direction
 - `Esc`: quit
 
-## Spawned Car Directions
+## Spawned Cars Directions
 - `blue` → straight
 - `yellow `→ turn left
 - `purple` → turn right
