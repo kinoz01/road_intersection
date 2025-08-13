@@ -77,17 +77,17 @@ async fn load_sprites() -> CarSprites {
     CarSprites { blue, yellow, purple }
 }
 
-// Base sprite must face UP/North
+// Base sprite face UP/North
 fn angle_for(dir: Direction) -> f32 {
     match dir {
-        Direction::Down  => 0.0,                                   // moving up on screen in your logic
+        Direction::Down  => 0.0,                                   // moving up on screen
         Direction::Right => std::f32::consts::FRAC_PI_2,           // 90°
         Direction::Top   => std::f32::consts::PI,                  // 180°
         Direction::Left  => -std::f32::consts::FRAC_PI_2,          // -90°
     }
 }
 
-// Return a reference; don’t move textures out of the holder
+// Return a reference; dontt move textures out of the holder
 fn sprite_for<'a>(s: &'a CarSprites, c: &Car) -> &'a Texture2D {
     if c.color == BLUE {
         &s.blue
@@ -124,7 +124,7 @@ async fn main() {
         state: false,
     };
 
-    // geometry kept consistent with your car/stop logic
+    // geometry 
     let center_x = 400.0;
     let center_y = 300.0;
     let road_w = 100.0;
@@ -134,7 +134,7 @@ async fn main() {
     let curb     = Color { r: 0.80, g: 0.80, b: 0.80, a: 1.0 };
     let yellow   = Color { r: 1.0,  g: 0.84, b: 0.0,  a: 1.0 };
 
-    // light circles (same coords as your old 30×30 rects)
+    // light circles
     let r = 15.0;
     let top_center    = (318.0 + r, 218.0 + r);
     let right_center  = (318.0 + r, 352.0 + r);
@@ -143,7 +143,7 @@ async fn main() {
 
     loop {
         // grass
-        grass_bg(40.0);
+        grass_bg(20.0);
 
         // roads
         draw_rectangle(0.0, h_road_y, 800.0, road_w, asphalt);
