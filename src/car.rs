@@ -40,10 +40,10 @@ impl Car {
 
     pub fn move_car(&mut self) {
         match self.dir {
-            Direction::Top => self.y += 1,
-            Direction::Down => self.y -= 1,
-            Direction::Left => self.x -= 1,
-            Direction::Right => self.x += 1,
+            Direction::Top => self.y += 2,
+            Direction::Down => self.y -= 2,
+            Direction::Left => self.x -= 2,
+            Direction::Right => self.x += 2,
         }
     }
 

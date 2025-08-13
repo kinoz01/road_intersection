@@ -74,11 +74,6 @@ async fn load_sprites() -> CarSprites {
     let yellow = load_texture("assets/car_yellow.png").await.expect("assets/car_yellow.png");
     let purple = load_texture("assets/car_purple.png").await.expect("assets/car_purple.png");
 
-    // keep crisp when scaled to 30×30
-    blue.set_filter(FilterMode::Nearest);
-    yellow.set_filter(FilterMode::Nearest);
-    purple.set_filter(FilterMode::Nearest);
-
     CarSprites { blue, yellow, purple }
 }
 

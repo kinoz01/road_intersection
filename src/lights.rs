@@ -26,7 +26,7 @@ pub fn traffic_lights(car: &mut Car, lights: &TrafficLights) {
 
 pub fn traffic_lights_sys(lights: &mut TrafficLights) {
     let green_duration = Duration::new(3, 0);
-    let off_duration = Duration::new(0, 500_000_000); // 0.5s
+    let off_duration = Duration::new(0, 100);
 
     let elapsed = lights.time.elapsed();
 
