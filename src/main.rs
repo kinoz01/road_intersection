@@ -41,7 +41,7 @@ fn dashed_line_x(y: f32, x0: f32, x1: f32, dash: f32, gap: f32, thick: f32, col:
 }
 
 fn crosswalk_h(y: f32, x0: f32, x1: f32) {
-    let stripe_w = 8.0;
+    let stripe_w = 6.0;
     let stripe_h = 14.0;
     let step = 14.0;
     let mut x = x0;
@@ -53,7 +53,7 @@ fn crosswalk_h(y: f32, x0: f32, x1: f32) {
 
 fn crosswalk_v(x: f32, y0: f32, y1: f32) {
     let stripe_w = 14.0;
-    let stripe_h = 8.0;
+    let stripe_h = 6.0;
     let step = 14.0;
     let mut y = y0;
     while y <= y1 - stripe_h {
@@ -73,36 +73,31 @@ async fn load_sprites() -> CarSprites {
     let blue   = load_texture("assets/car_blue.png").await.expect("assets/car_blue.png");
     let yellow = load_texture("assets/car_yellow.png").await.expect("assets/car_yellow.png");
     let purple = load_texture("assets/car_purple.png").await.expect("assets/car_purple.png");
-
     CarSprites { blue, yellow, purple }
 }
 
-// Base sprite face UP/North
+// Base sprite faces UP/North
 fn angle_for(dir: Direction) -> f32 {
     match dir {
-        Direction::Down  => 0.0,                                   // moving up on screen
-        Direction::Right => std::f32::consts::FRAC_PI_2,           // 90°
-        Direction::Top   => std::f32::consts::PI,                  // 180°
-        Direction::Left  => -std::f32::consts::FRAC_PI_2,          // -90°
+        Direction::Down  => 0.0,
+        Direction::Right => std::f32::consts::FRAC_PI_2,
+        Direction::Top   => std::f32::consts::PI,
+        Direction::Left  => -std::f32::consts::FRAC_PI_2,
     }
 }
 
 // Return a reference
 fn sprite_for<'a>(s: &'a CarSprites, c: &Car) -> &'a Texture2D {
-    if c.color == BLUE {
-        &s.blue
-    } else if c.color == YELLOW {
-        &s.yellow
-    } else {
-        &s.purple
-    }
+    if c.color == BLUE { &s.blue }
+    else if c.color == YELLOW { &s.yellow }
+    else { &s.purple }
 }
 
 fn window_conf() -> Conf {
     Conf {
         window_title: "🟢🔴 Road Intersection ➕".to_owned(),
         window_width: 800,
-        window_height: 600,
+        window_height: 700,
         window_resizable: false,
         ..Default::default()
     }
@@ -124,22 +119,22 @@ async fn main() {
         state: false,
     };
 
-    // geometry 
+    // ----- geometry -----------
     let center_x = 400.0;
-    let center_y = 300.0;
-    let road_w = 100.0;
-    let h_road_y = 250.0;
+    let center_y = 350.0;   
+    let road_w   = 100.0;
+    let h_road_y = 300.0;
     let v_road_x = 350.0;
     let asphalt  = Color { r: 0.12, g: 0.12, b: 0.12, a: 1.0 };
     let curb     = Color { r: 0.80, g: 0.80, b: 0.80, a: 1.0 };
     let yellow   = Color { r: 1.0,  g: 0.84, b: 0.0,  a: 1.0 };
 
-    // light circles
+    // traffic light circles 
     let r = 15.0;
-    let top_center    = (318.0 + r, 218.0 + r);
-    let right_center  = (318.0 + r, 352.0 + r);
-    let down_center   = (452.0 + r, 352.0 + r);
-    let left_center   = (452.0 + r, 218.0 + r);
+    let top_center    = (318.0 + r, 268.0 + r); 
+    let right_center  = (318.0 + r, 402.0 + r);
+    let down_center   = (452.0 + r, 402.0 + r);
+    let left_center   = (452.0 + r, 268.0 + r);
 
     loop {
         // grass
@@ -147,14 +142,14 @@ async fn main() {
 
         // roads
         draw_rectangle(0.0, h_road_y, 800.0, road_w, asphalt);
-        draw_rectangle(v_road_x, 0.0,  road_w, 600.0, asphalt);
+        draw_rectangle(v_road_x, 0.0,  road_w, 700.0, asphalt);
 
         // curbs
         let curb_t = 4.0;
         draw_rectangle(0.0, h_road_y - curb_t, 800.0, curb_t, curb);
         draw_rectangle(0.0, h_road_y + road_w, 800.0, curb_t, curb);
-        draw_rectangle(v_road_x - curb_t, 0.0, curb_t, 600.0, curb);
-        draw_rectangle(v_road_x + road_w, 0.0, curb_t, 600.0, curb);
+        draw_rectangle(v_road_x - curb_t, 0.0, curb_t, 700.0, curb);
+        draw_rectangle(v_road_x + road_w, 0.0, curb_t, 700.0, curb);
 
         // darker intersection pad + center dot
         let pad = Color { r: 0.08, g: 0.08, b: 0.08, a: 1.0 };
@@ -172,7 +167,7 @@ async fn main() {
         let gap  = 10.0;
         let thick = 3.0;
         dashed_line_y(center_x, 0.0, h_road_y - 10.0, dash, gap, thick, yellow);
-        dashed_line_y(center_x, h_road_y + road_w + 10.0, 600.0, dash, gap, thick, yellow);
+        dashed_line_y(center_x, h_road_y + road_w + 10.0, 700.0, dash, gap, thick, yellow);
         dashed_line_x(center_y, 0.0, v_road_x - 10.0, dash, gap, thick, yellow);
         dashed_line_x(center_y, v_road_x + road_w + 10.0, 800.0, dash, gap, thick, yellow);
 
@@ -199,7 +194,7 @@ async fn main() {
                 car.redirect();
             }
 
-            // sprite draw (30×30 footprint, rotate around center)
+            // sprite draw (30×40 footprint, rotate around center)
             let tex = sprite_for(&sprites, car);
             let x = car.x as f32;
             let y = car.y as f32;
@@ -216,14 +211,13 @@ async fn main() {
             );
         }
 
-        // keep cars within screen bounds
-        cars_vec.retain(|car| car.y <= 630 && car.y >= -30 && car.x <= 830 && car.x >= -30);
+        cars_vec.retain(|car| car.y <= 740 && car.y >= -40 && car.x <= 840 && car.x >= -40);
 
-        // input (Left/Right swapped)
+        // input
         if is_key_pressed(KeyCode::Up)    { key_up(&mut cars_vec); }
         if is_key_pressed(KeyCode::Down)  { key_down(&mut cars_vec); }
-        if is_key_pressed(KeyCode::Left)  { key_right(&mut cars_vec); } // spawn from right, moving left
-        if is_key_pressed(KeyCode::Right) { key_left(&mut cars_vec);  } // spawn from left, moving right
+        if is_key_pressed(KeyCode::Left)  { key_right(&mut cars_vec); } // from right, moving left
+        if is_key_pressed(KeyCode::Right) { key_left(&mut cars_vec);  } // from left, moving right
         if is_key_pressed(KeyCode::R)     { key_r(&mut cars_vec); }
         if is_key_pressed(KeyCode::Escape) { break; }
 

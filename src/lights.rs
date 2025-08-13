@@ -1,5 +1,5 @@
-use crate::{Car, Direction};
-pub use std::time::{Duration, Instant};
+use crate::{ Car, Direction };
+pub use std::time::{ Duration, Instant };
 
 pub struct TrafficLights {
     pub lights_top: bool,
@@ -13,10 +13,10 @@ pub struct TrafficLights {
 
 pub fn traffic_lights(car: &mut Car, lights: &TrafficLights) {
     if
-        (!lights.lights_down && car.dir == Direction::Down && car.y == 360) ||
-        (!lights.lights_top && car.dir == Direction::Top && car.y == 210) ||
-        (!lights.lights_right && car.dir == Direction::Right && car.x == 310) ||
-        (!lights.lights_left && car.dir == Direction::Left && car.x == 460)
+        (!lights.lights_down && car.dir == Direction::Down && car.y == 420) ||
+        (!lights.lights_top  && car.dir == Direction::Top  && car.y == 240) ||
+        (!lights.lights_right && car.dir == Direction::Right && car.x == 300) ||
+        (!lights.lights_left  && car.dir == Direction::Left  && car.x == 470)
     {
         car.moving = false;
     } else {
@@ -26,7 +26,7 @@ pub fn traffic_lights(car: &mut Car, lights: &TrafficLights) {
 
 pub fn traffic_lights_sys(lights: &mut TrafficLights) {
     let green_duration = Duration::new(3, 0);
-    let off_duration = Duration::new(0, 100);
+    let off_duration = Duration::new(0, 1); // 0.5s all-red
 
     let elapsed = lights.time.elapsed();
 

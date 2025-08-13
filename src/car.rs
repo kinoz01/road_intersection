@@ -48,42 +48,42 @@ impl Car {
     }
 
     pub fn redirect(&mut self) {
-        // from Top
+        // from Top (moving down)
         if self.dir == Direction::Top {
-            if self.x == 360 && self.y == 260 && self.color == PURPLE_RGB {
-                self.dir = Direction::Left;
-                self.turned = true;
-            } else if self.x == 360 && self.y == 310 && self.color == YELLOW {
-                self.dir = Direction::Right;
-                self.turned = true;
-            }
-        }
-        // from Down
-        else if self.dir == Direction::Down {
-            if self.y == 260 && self.x == 410 && self.color == YELLOW {
-                self.dir = Direction::Left;
-                self.turned = true;
-            } else if self.y == 310 && self.x == 410 && self.color == PURPLE_RGB {
-                self.dir = Direction::Right;
-                self.turned = true;
-            }
-        }
-        // from Right
-        else if self.dir == Direction::Right {
             if self.x == 360 && self.y == 310 && self.color == PURPLE_RGB {
+                self.dir = Direction::Left;
+                self.turned = true;
+            } else if self.x == 360 && self.y == 360 && self.color == YELLOW {
+                self.dir = Direction::Right;
+                self.turned = true;
+            }
+        }
+        // from Down (moving up)
+        else if self.dir == Direction::Down {
+            if self.y == 310 && self.x == 410 && self.color == YELLOW {
+                self.dir = Direction::Left;
+                self.turned = true;
+            } else if self.y == 360 && self.x == 410 && self.color == PURPLE_RGB {
+                self.dir = Direction::Right;
+                self.turned = true;
+            }
+        }
+        // from Right (moving right)
+        else if self.dir == Direction::Right {
+            if self.x == 360 && self.y == 360 && self.color == PURPLE_RGB {
                 self.dir = Direction::Top;
                 self.turned = true;
-            } else if self.x == 410 && self.y == 310 && self.color == YELLOW {
+            } else if self.x == 410 && self.y == 360 && self.color == YELLOW {
                 self.dir = Direction::Down;
                 self.turned = true;
             }
         }
-        // from Left
+        // from Left (moving left)
         else if self.dir == Direction::Left {
-            if self.x == 360 && self.y == 260 && self.color == YELLOW {
+            if self.x == 360 && self.y == 310 && self.color == YELLOW {
                 self.dir = Direction::Top;
                 self.turned = true;
-            } else if self.x == 410 && self.y == 260 && self.color == PURPLE_RGB {
+            } else if self.x == 410 && self.y == 310 && self.color == PURPLE_RGB {
                 self.dir = Direction::Down;
                 self.turned = true;
             }
@@ -141,7 +141,7 @@ pub fn push_car(
     check_x: Option<i32>,
     dir: Direction,
 ) {
-    const MAX_CARS: usize = 25;
+    const MAX_CARS: usize = 28;
 
     let can_push = if cars_vec.is_empty() {
         true
@@ -174,9 +174,10 @@ pub fn push_car(
     }
 }
 
+// Spawners 
 pub fn key_up(cars_vec: &mut Vec<Car>) {
-    let car = Car::new(410, 600, Direction::Down, Car::random_c());
-    push_car(cars_vec, car, Some(510), None, Direction::Down);
+    let car = Car::new(410, 700, Direction::Down, Car::random_c()); 
+    push_car(cars_vec, car, Some(610), None, Direction::Down);      
 }
 
 pub fn key_down(cars_vec: &mut Vec<Car>) {
@@ -185,12 +186,12 @@ pub fn key_down(cars_vec: &mut Vec<Car>) {
 }
 
 pub fn key_left(cars_vec: &mut Vec<Car>) {
-    let car = Car::new(-30, 310, Direction::Right, Car::random_c());
+    let car = Car::new(-30, 360, Direction::Right, Car::random_c()); 
     push_car(cars_vec, car, None, Some(60), Direction::Right);
 }
 
 pub fn key_right(cars_vec: &mut Vec<Car>) {
-    let car = Car::new(800, 260, Direction::Left, Car::random_c());
+    let car = Car::new(800, 310, Direction::Left, Car::random_c()); 
     push_car(cars_vec, car, None, Some(740), Direction::Left);
 }
 
