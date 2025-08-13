@@ -141,7 +141,7 @@ pub fn push_car(
     check_x: Option<i32>,
     dir: Direction,
 ) {
-    const MAX_CARS: usize = 20;
+    const MAX_CARS: usize = 25;
 
     let can_push = if cars_vec.is_empty() {
         true

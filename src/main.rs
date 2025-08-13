@@ -6,7 +6,17 @@ pub use lights::*;
 
 use macroquad::prelude::*;
 
-#[macroquad::main("Road Intersection")]
+fn window_conf() -> Conf {
+    Conf {
+        window_title: "🟢🔴 Road Intersection ➕".to_owned(),
+        window_width: 800,
+        window_height: 600,
+        window_resizable: false,
+        ..Default::default()
+    }
+}
+
+#[macroquad::main(window_conf)]
 async fn main() {
     let mut cars_vec: Vec<Car> = Vec::new();
 
