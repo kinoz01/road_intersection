@@ -210,7 +210,7 @@ async fn main() {
                 DrawTextureParams {
                     dest_size: Some(vec2(30.0, 40.0)),
                     rotation: angle_for(car.dir),
-                    pivot: Some(vec2(x + 15.0, y + 15.0)),
+                    pivot: Some(vec2(x + 15.0, y + 20.0)),
                     ..Default::default()
                 },
             );
@@ -225,7 +225,7 @@ async fn main() {
         if is_key_pressed(KeyCode::Left)  { key_right(&mut cars_vec); } // spawn from right, moving left
         if is_key_pressed(KeyCode::Right) { key_left(&mut cars_vec);  } // spawn from left, moving right
         if is_key_pressed(KeyCode::R)     { key_r(&mut cars_vec); }
-        if is_key_pressed(KeyCode::Escape) || is_quit_requested() { break; }
+        if is_key_pressed(KeyCode::Escape) { break; }
 
         next_frame().await;
     }
