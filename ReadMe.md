@@ -1,5 +1,5 @@
 ## Road Intersection (Macroquad)
-A tiny traffic intersection sim built with [Macroquad]. Cars spawn from the four roads and obey a simple traffic-light cycle. 
+A tiny traffic intersection sim built with `Macroquad`. Cars spawn from the four roads and obey a simple traffic-light cycle. 
 
 ## Controls
 - `↑`: spawn from bottom (moving up)
@@ -19,4 +19,6 @@ A tiny traffic intersection sim built with [Macroquad]. Cars spawn from the four
 
 - `car.rs`: Car holds position, direction, color, turning rules and spacing checks.
 
-- `main.rs`: Renders the scene (roads, crosswalks, lights), spawns cars on keypress, updates cars each frame, and draws them (sprites or rectangles).
+- `main.rs`: Renders the scene (roads, crosswalks, lights), spawns cars on keypress, updates cars each frame, and spawns them.
+
+(shout out to [https://github.com/sadiqui](asadiqui) for graphic design inspiration)
