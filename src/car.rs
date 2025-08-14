@@ -14,6 +14,7 @@ pub struct Car {
     pub x: i32,
     pub y: i32,
     pub dir: Direction,
+    pub origin: Direction,
     pub color: Color,
     pub turned: bool,
     pub moving: bool,
@@ -33,6 +34,7 @@ impl Car {
             y,
             dir,
             color,
+            origin: dir,
             turned: false,
             moving: false,
         }
