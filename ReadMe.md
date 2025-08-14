@@ -21,4 +21,4 @@ A tiny traffic intersection sim built with `Macroquad`. Cars spawn from the four
 
 - `main.rs`: Renders the scene (roads, crosswalks, lights), spawns cars on keypress, updates cars each frame, and spawns them.
 
-(shout out to (asadiqui)[https://github.com/sadiqui] for graphic design inspiration)
+(shout out to [asadiqui](https://github.com/sadiqui) for graphic design inspiration)
