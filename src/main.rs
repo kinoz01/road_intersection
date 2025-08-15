@@ -114,10 +114,10 @@ async fn main() {
     let mut cars_vec: Vec<Car> = Vec::new();
 
     let mut lights = TrafficLights {
-        lights_top: false,
-        lights_down: false,
-        lights_left: false,
-        lights_right: false,
+        lights_top_left: false,
+        lights_down_right: false,
+        lights_top_right: false,
+        lights_down_left: false,
         time: std::time::Instant::now(),
         current_direction: Direction::Right,
         state: false,
@@ -185,10 +185,10 @@ async fn main() {
         traffic_lights_sys(&mut lights, &cars_vec);
 
         // lights as circles
-        draw_circle(top_left.0, top_left.1, r, if lights.lights_top { GREEN } else { RED });
-        draw_circle(down_left.0, down_left.1, r, if lights.lights_right { GREEN } else { RED });
-        draw_circle(down_right.0, down_right.1, r, if lights.lights_down { GREEN } else { RED });
-        draw_circle(top_right.0, top_right.1, r, if lights.lights_left { GREEN } else { RED });
+        draw_circle(top_left.0, top_left.1, r, if lights.lights_top_left { GREEN } else { RED });
+        draw_circle(down_left.0, down_left.1, r, if lights.lights_down_left { GREEN } else { RED });
+        draw_circle(down_right.0, down_right.1, r, if lights.lights_down_right { GREEN } else { RED });
+        draw_circle(top_right.0, top_right.1, r, if lights.lights_top_right { GREEN } else { RED });
 
         // instructions
         draw_text("Arrows, R to spawn | Esc quit", 12.0, 24.0, 24.0, WHITE);

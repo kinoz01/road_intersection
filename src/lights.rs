@@ -2,10 +2,10 @@ use crate::{ Car, Direction };
 pub use std::time::{ Duration, Instant };
 
 pub struct TrafficLights {
-    pub lights_top: bool,
-    pub lights_down: bool,
-    pub lights_left: bool,
-    pub lights_right: bool,
+    pub lights_top_left: bool,
+    pub lights_down_right: bool,
+    pub lights_top_right: bool,
+    pub lights_down_left: bool,
     pub current_direction: Direction,
     pub state: bool, // true = green on current_direction, false = all-red
     pub time: Instant, // phase start
@@ -13,10 +13,10 @@ pub struct TrafficLights {
 
 pub fn traffic_lights(car: &mut Car, lights: &TrafficLights) {
     if
-        (!lights.lights_down && car.dir == Direction::Down && car.y == 420) ||
-        (!lights.lights_top && car.dir == Direction::Top && car.y == 240) ||
-        (!lights.lights_right && car.dir == Direction::Right && car.x == 300) ||
-        (!lights.lights_left && car.dir == Direction::Left && car.x == 470)
+        (!lights.lights_down_right && car.dir == Direction::Down && car.y == 420) ||
+        (!lights.lights_top_left && car.dir == Direction::Top && car.y == 240) ||
+        (!lights.lights_down_left && car.dir == Direction::Right && car.x == 300) ||
+        (!lights.lights_top_right && car.dir == Direction::Left && car.x == 470)
     {
         car.moving = false;
     } else {
@@ -82,18 +82,18 @@ pub fn traffic_lights_sys(lights: &mut TrafficLights, cars: &[Car]) {
     }
     #[inline]
     fn set_green(l: &mut TrafficLights, i: usize) {
-        l.lights_right = i == 0;
-        l.lights_top = i == 1;
-        l.lights_left = i == 2;
-        l.lights_down = i == 3;
+        l.lights_down_left = i == 0;
+        l.lights_top_left = i == 1;
+        l.lights_top_right = i == 2;
+        l.lights_down_right = i == 3;
         l.current_direction = idx_dir(i);
     }
     #[inline]
     fn all_red(l: &mut TrafficLights) {
-        l.lights_right = false;
-        l.lights_top = false;
-        l.lights_left = false;
-        l.lights_down = false;
+        l.lights_down_left = false;
+        l.lights_top_left = false;
+        l.lights_top_right = false;
+        l.lights_down_right = false;
     }
     #[inline]
     fn next_active_idx(cur_i: usize, active: [bool; 4]) -> usize {
